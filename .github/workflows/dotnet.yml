@@ -14,11 +14,11 @@ jobs:
       - name: Install dependencies
         run: dotnet restore
       - name: Test with dotnet
-        run: dotnet test --logger trx --results-directory "TestResults-5.0"
+        run: dotnet test  --logger trx --results-directory "TestResults-5.0"
       - name: Upload dotnet test results
         uses: actions/upload-artifact@v2
         with:
           name: dotnet-results-5.0
-          path: TestResults-5.0
+          path: TestResults-5.0/*
         # Use always() to always run this step to publish test results when there are test failures
         if: ${{ always() }}
