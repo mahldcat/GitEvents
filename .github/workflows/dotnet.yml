@@ -19,6 +19,6 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: dotnet-results-5.0
-          path: BuildArtifacts/TestResults-5.0
+          path: TestResults-5.0
         # Use always() to always run this step to publish test results when there are test failures
         if: ${{ always() }}
