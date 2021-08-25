@@ -15,6 +15,10 @@ jobs:
         run: dotnet restore
       - name: Test with dotnet
         run: dotnet test  --logger trx --results-directory "TestResults-5.0"
+      - name: Publish Debug build with dotnet
+        run: dotnet publish -o ./Target/Release -c Debug
+      - name: Publish Release build with dotnet
+        run: dotnet publish -o ./Target/Debug -c Release
       - name: Upload dotnet test results
         uses: actions/upload-artifact@v2
         with:
