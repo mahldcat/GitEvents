@@ -15,10 +15,6 @@ jobs:
         run: dotnet restore
       - name: Test with dotnet
         run: dotnet test  --logger trx --results-directory "TestResults-5.0"
-      - name: Publish Debug build with dotnet
-        run: dotnet publish -o ./Target/Release -c Debug
-      - name: Publish Release build with dotnet
-        run: dotnet publish -o ./Target/Debug -c Release
       - name: Upload dotnet test results
         uses: actions/upload-artifact@v2
         with:
@@ -26,3 +22,16 @@ jobs:
           path: TestResults-5.0/*
         # Use always() to always run this step to publish test results when there are test failures
         if: ${{ always() }}
+      - name: Publish build with dotnet
+        run: dotnet publish -o ./Target
+      - name: Archive Release
+        uses: thedoctor0/zip-release@master
+        with:
+          type: 'zip'
+          filename: 'GitEvents.zip'
+          directory: ./Target  
+      - name: Upload Release
+        uses: ncipollo/release-action@v1
+        with:
+         artifacts: "GitEvents.zip"
+         token: ${{ secrets.GITHUB_TOKEN }}
