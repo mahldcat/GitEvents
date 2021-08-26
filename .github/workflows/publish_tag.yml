@@ -1,9 +1,10 @@
 name: dotnet package
 
-on:  
+on:
   push:
-    tags:
-      - '*'
+    branches:
+      - master
+      
 jobs:
   build:
     runs-on: ubuntu-latest
