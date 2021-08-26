@@ -16,6 +16,7 @@ jobs:
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: ${{ steps.tag_version.outputs.new_tag }}
         with:
           tag_name: ${{ steps.tag_version.outputs.new_tag }}
           release_name: Release ${{ steps.tag_version.outputs.new_tag }}
@@ -46,6 +47,6 @@ jobs:
       - name: Upload Release
         uses: ncipollo/release-action@v1
         with:
-         tag: ${{ tag_name }}
+         tag: ${{ env.tag_name }}
          artifacts: "GitEvents.zip"
          token: ${{ secrets.GITHUB_TOKEN }}
